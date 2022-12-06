@@ -1,0 +1,14 @@
+{
+  "name": "AOC-2022",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:benroasting/Advent-Of-Code-2022.git",
+  "author": "Ben Young <ben.young@ramseysolutions.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1"
+  }
+}

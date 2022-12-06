@@ -4,19 +4,6 @@ const inputArray = require("../inputArray");
 const inputFile = path.resolve(__dirname, "input.txt");
 const data = inputArray(inputFile);
 
-// const data = ["A Y", "B X", "C Z"];
-// const A = "rock";
-// const B = "paper";
-// const C = "scissors";
-
-// const Y = "paper";
-// const X = "rock";
-// const Z = "scissors";
-
-// const Y = "draw";
-// const X = "lose";
-// const Z = "win";
-
 function winCon(oppMove, myMove) {
   if (oppMove === "A" && myMove === "Y") {
     return 6;
