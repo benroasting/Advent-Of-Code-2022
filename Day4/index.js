@@ -17,15 +17,6 @@ function partOne(realData) {
   return result;
 }
 
-// let result = 0;
-//   for (let i = 0; i < sampleData.length; i++) {
-//     parseLine(sampleData[i]);
-//     if (( (el1 <= el3) && (el2 >= el4) ) || ( (el1 >= el3) && (el2 <= el4) )){
-//         result += 1;
-//     }
-//   }
-//   return result;
-
 // function parseLine(input) {
 //   const [first, second] = input.split(",");
 //   const [el1, el2] = first.split("-");
