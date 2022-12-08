@@ -1,41 +1,48 @@
-const path = require("path");
-const inputArray = require("../inputArray");
-const sample = path.resolve(__dirname, "sample.txt");
-const sampleData = inputArray(sample);
+class Instruction {
+  constructor(input) {
+    const [_1, count, _2, from, _3, to] = input.split(" ");
 
-let sampleStack = {
-  1: ["Z", "N", "D"],
-  2: ["M", "C"],
-  3: ["P"],
-};
-
-let dataStack = {
-  1: ["R", "G", "H", "Q", "S", "B", "T", "N"],
-  2: ["H", "S", "F", "D", "P", "Z", "J"],
-  3: ["Z", "H", "V"],
-  4: ["M", "Z", "J", "F", "G", "H"],
-  5: ["T", "Z", "C", "D", "L", "M", "S", "R"],
-  6: ["M", "T", "W", "V", "H", "Z", "J"],
-  7: ["T", "F", "P", "L", "Z"],
-  8: ["Q", "V", "W", "S"],
-  9: ["W", "H", "L", "M", "T", "D", "N", "C"],
-};
-
-class Stack {
-  constructor() {
-    this.data = [];
-  }
-
-  push(crate) {
-    this.data.push(crate);
-  }
-
-  pop() {
-    return this.data.pop();
-  }
-
-  peek() {
-    return this.data[this.data.length - 1];
+    this.count = parseInt(count);
+    this.from = parseInt(from);
+    this.to = parseInt(to);
   }
 }
-module.exports = Stack;
+
+function partOne(crates, inputs) {
+  const instructions = inputs.map((line) => new Instruction(line));
+  instructions.forEach((instruction) => {
+    for (let i = 0; i < instruction.count; i++) {
+      const crate = crates[instruction.from].pop();
+      if (!crate) {
+        return;
+      }
+      crates[instruction.to].push(crate);
+    }
+  });
+  const view = Object.values(crates).map((stack) => stack.slice(-1)[0]);
+  return view.join("");
+}
+
+function partTwo(crates, inputs) {
+  const instructions = inputs.map((line) => new Instruction(line));
+  // const instructions = inputs
+  //   .map((line) => line.replace(/(move|from|to)/g, "").trim())
+  //   .map((line) => line.split("  ").map(Number));
+  instructions.forEach((instruction) => {
+    const crate = crates[instruction.from].splice(
+      crates[instruction.from].length - instruction.count,
+      instruction.count
+    );
+    crates[instruction.to].push(...crate);
+    console.log(crates);
+  });
+
+  const view = Object.values(crates).map((stack) => stack.slice(-1)[0]);
+  return view.join("");
+}
+
+module.exports = {
+  Instruction,
+  partOne,
+  partTwo,
+};
